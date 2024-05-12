@@ -70,23 +70,17 @@ int Simulador::calcularVidaEquipe(int seletorDeEquipe)
 Personagem* Simulador::proximoPersonagem(vector<Personagem*> equipe)
 {
     int tamanho = equipe.size();
+    int randomiza;
     if (tamanho == 0)
     {
         return nullptr;
     }
-
-    int contador = 0;
-    while (contador < tamanho)
-    {
-        if (equipe[contador]->getVida()>0)
-        {
-            return equipe[contador];
-        }
-        contador++;
-
+    do{
+        randomiza = std::rand() % tamanho;
     }
+    while(equipe[randomiza]->getVida() <= 0);
 
-    return nullptr;
+    return equipe[randomiza];
 }
 
 int Simulador::criarCombate(Personagem* personagem1, Personagem* personagem2)
